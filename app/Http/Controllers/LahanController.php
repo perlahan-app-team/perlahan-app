@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lahan;
+use App\Support\FilterLahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -20,14 +21,16 @@ class LahanController extends Controller
         $query = Lahan::query()
             ->where('status', 'tersedia');
 
-        if ($request->filled('cari')) {
-            $cari = $request->input('cari');
-
-            $query->where(function ($q) use ($cari) {
-                $q->where('nama_lahan', 'like', "%{$cari}%")
-                    ->orWhere('alamat', 'like', "%{$cari}%");
-            });
-        }
+        // Pertahankan parameter `cari` lama sekaligus dukung filter D-06.
+        $filter = $request->validate([
+            'cari' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'status' => ['sometimes', 'nullable', \Illuminate\Validation\Rule::in([
+                'tersedia', 'diajukan', 'dimanfaatkan', 'tidak_aktif',
+            ])],
+            'luas_min' => ['sometimes', 'nullable', 'numeric', 'min:0'],
+            'luas_max' => ['sometimes', 'nullable', 'numeric', 'min:0', 'gte:luas_min'],
+        ]);
+        FilterLahan::terapkan($query, $filter);
 
         $lahan = $query->latest()->paginate(10)->withQueryString();
 
@@ -42,6 +45,7 @@ class LahanController extends Controller
         abort_unless(Schema::hasTable('lahans'), 404);
 
         $lahan = Lahan::query()
+            ->with('fotos', 'rekomendasiLahans')
             ->where('status', 'tersedia')
             ->findOrFail($id);
 

@@ -84,3 +84,17 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
     Route::put('/masyarakat/profil', [ProfilController::class, 'update'])
         ->name('masyarakat.profil.update');
 });
+// WORK-55: endpoint CRUD data lahan (khusus Admin).
+Route::middleware(['auth', 'role:admin'])->prefix('admin/data/lahan')->name('admin.data.lahan.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Admin\LahanDataController::class, 'index'])->name('index');
+    Route::post('/', [\App\Http\Controllers\Admin\LahanDataController::class, 'store'])->name('store');
+    Route::put('/{lahan}', [\App\Http\Controllers\Admin\LahanDataController::class, 'update'])->whereNumber('lahan')->name('update');
+    Route::delete('/{lahan}', [\App\Http\Controllers\Admin\LahanDataController::class, 'destroy'])->whereNumber('lahan')->name('destroy');
+});
+
+// WORK-69 / WORK-77 / WORK-84: sumber data untuk daftar, detail dan peta.
+Route::middleware('auth')->prefix('data/lahan')->name('data.lahan.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\LahanDataController::class, 'index'])->name('index');
+    Route::get('/koordinat', [\App\Http\Controllers\LahanDataController::class, 'koordinat'])->name('koordinat');
+    Route::get('/{lahan}', [\App\Http\Controllers\LahanDataController::class, 'show'])->whereNumber('lahan')->name('show');
+});
