@@ -14,9 +14,10 @@ class LahanDataController extends Controller
     public function index(Request $request): JsonResponse
     {
         $filter = $this->validasiFilter($request);
-        $query = Lahan::query()->with('fotos')->orderBy('id');
+        $query = Lahan::query()->with('fotos');
         $this->batasiMasyarakat($request, $query);
         FilterLahan::terapkan($query, $filter);
+        FilterLahan::urutkan($query, $filter['urut'] ?? null, 'id-terlama');
 
         return response()->json($query->paginate(10)->withQueryString());
     }
@@ -69,6 +70,9 @@ class LahanDataController extends Controller
     {
         $filter = $request->validate([
             'cari' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'lokasi' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'luas' => ['sometimes', 'nullable', Rule::in(['kecil', 'besar'])],
+            'urut' => ['sometimes', 'nullable', Rule::in(['terbaru', 'luas-terbesar', 'luas-terkecil'])],
             'status' => ['sometimes', 'nullable', Rule::in(['tersedia', 'diajukan', 'dimanfaatkan', 'tidak_aktif'])],
             'luas_min' => ['sometimes', 'nullable', 'numeric', 'min:0'],
             'luas_max' => ['sometimes', 'nullable', 'numeric', 'min:0', 'gte:luas_min'],

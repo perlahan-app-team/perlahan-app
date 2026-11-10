@@ -47,3 +47,13 @@ Jangan commit file `.env` atau dump pengguna yang berisi hash password/sesi.
   ['judul' => $judul, 'alasan' => $alasan]);`.
 - **Jingga/Brilliant:** konsumsi endpoint baca serta relasi foto; frontend
   tidak dibuat atau diubah dalam pengerjaan Adithya.
+
+## Pembaruan kompatibilitas dari ZIP proyek terbaru (WORK-77)
+
+Filter backend (endpoint `GET /data/lahan` dan halaman daftar bawaan) sekarang mendukung:
+- `cari`: nama, kode, alamat, atau kota lahan; `lokasi`: kota atau bagian alamat.
+- `luas=kecil` untuk luas di bawah 1.000 m² atau `luas=besar` untuk luas 1.000 m² ke atas; tetap mendukung `luas_min` dan `luas_max`.
+- `urut=terbaru|luas-terbesar|luas-terkecil` untuk urutan aman; hanya opsi tervalidasi diterima.
+- Pilihan kota (`lokasiOptions`) disediakan untuk formulir daftar lahan, tanpa mengubah tampilan Blade.
+
+Hanya bagian backend Adithya yang diselaraskan dengan ZIP; file halaman/frontend, proses login, upload gambar, dan algoritma rekomendasi Fadhil tidak disalin ke branch ini.

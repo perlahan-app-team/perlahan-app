@@ -145,6 +145,33 @@ class BackendAdithyaD00D08Test extends TestCase
         ]))->assertOk()->assertJsonCount(1, 'data');
     }
 
+    public function test_work_77_filter_versi_proyek_terbaru_tetap_terbatas_pada_backend(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $kecil = $this->lahan(['kode_lahan' => 'LH-SBY-K', 'kota' => 'Surabaya', 'luas' => 700]);
+        $besar = $this->lahan(['kode_lahan' => 'LH-SBY-B', 'kota' => 'Surabaya', 'luas' => 1900]);
+        $sedang = $this->lahan(['kode_lahan' => 'LH-SBY-S', 'kota' => 'Surabaya', 'luas' => 1400]);
+        $luar = $this->lahan(['kode_lahan' => 'LH-MLG-K', 'kota' => 'Malang', 'luas' => 300]);
+
+        // Cari kode lahan persis dari formulir terbaru (pencarian seperti LIKE).
+        $this->actingAs($admin)->getJson(route('data.lahan.index', ['cari' => 'LH-SBY-K']))
+            ->assertOk()->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.id', $kecil->id);
+
+        // Lokasi, luas kategoris, dan pengurutan dapat digabungkan.
+        $this->actingAs($admin)->getJson(route('data.lahan.index', [
+            'lokasi' => 'Surabaya', 'luas' => 'besar', 'urut' => 'luas-terkecil',
+        ]))->assertOk()->assertJsonCount(2, 'data')
+            ->assertJsonPath('data.0.id', $sedang->id)
+            ->assertJsonPath('data.1.id', $besar->id);
+
+        // Nilai filter dari pengguna tidak boleh menjadi nama kolom/sort SQL.
+        $this->actingAs($admin)->getJson(route('data.lahan.index', ['luas' => 'bebas']))
+            ->assertUnprocessable()->assertJsonValidationErrors('luas');
+        $this->actingAs($admin)->getJson(route('data.lahan.index', ['urut' => 'raw-sql']))
+            ->assertUnprocessable()->assertJsonValidationErrors('urut');
+    }
+
     public function test_work_84_koordinat_untuk_peta_berupa_angka_dan_tidak_null(): void
     {
         $masyarakat = User::factory()->create(['role' => 'masyarakat']);

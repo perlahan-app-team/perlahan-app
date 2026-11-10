@@ -15,6 +15,7 @@ class LahanController extends Controller
             return view('masyarakat.lahan.index', [
                 'lahan' => collect(),
                 'tableBelumTersedia' => true,
+                'lokasiOptions' => collect(),
             ]);
         }
 
@@ -24,6 +25,9 @@ class LahanController extends Controller
         // Pertahankan parameter `cari` lama sekaligus dukung filter D-06.
         $filter = $request->validate([
             'cari' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'lokasi' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'luas' => ['sometimes', 'nullable', \Illuminate\Validation\Rule::in(['kecil', 'besar'])],
+            'urut' => ['sometimes', 'nullable', \Illuminate\Validation\Rule::in(['terbaru', 'luas-terbesar', 'luas-terkecil'])],
             'status' => ['sometimes', 'nullable', \Illuminate\Validation\Rule::in([
                 'tersedia', 'diajukan', 'dimanfaatkan', 'tidak_aktif',
             ])],
@@ -32,11 +36,15 @@ class LahanController extends Controller
         ]);
         FilterLahan::terapkan($query, $filter);
 
-        $lahan = $query->latest()->paginate(10)->withQueryString();
+        FilterLahan::urutkan($query, $filter['urut'] ?? null);
+        $lahan = $query->paginate(10)->withQueryString();
+        $lokasiOptions = Lahan::query()->whereNotNull('kota')->where('kota', '!=', '')
+            ->distinct()->orderBy('kota')->pluck('kota');
 
         return view('masyarakat.lahan.index', [
             'lahan' => $lahan,
             'tableBelumTersedia' => false,
+            'lokasiOptions' => $lokasiOptions,
         ]);
     }
 
