@@ -10,6 +10,10 @@ class Lahan extends Model
 {
     use HasFactory;
 
+    public const TARIF_SEWA_HARIAN = 1500000;
+
+    protected $attributes = ['tarif_sewa_harian' => self::TARIF_SEWA_HARIAN];
+
     protected $table = 'lahans';
 
     protected $fillable = [
@@ -24,6 +28,11 @@ class Lahan extends Model
         'deskripsi',
         'kondisi',
         'foto_path',
+        'tarif_sewa_harian',
+        'bank_pembayaran',
+        'rekening_pembayaran',
+        'penerima_pembayaran',
+        'qr_pembayaran_path',
     ];
 
     protected function casts(): array
@@ -32,6 +41,7 @@ class Lahan extends Model
             'luas' => 'decimal:2',
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
+            'tarif_sewa_harian' => 'integer',
         ];
     }
 
