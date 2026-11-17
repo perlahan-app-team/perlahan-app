@@ -1,0 +1,13 @@
+/* Original Figma Make artwork; keep the full image and its aspect ratio. */
+.logo{width:80px;height:auto;display:block;flex:0 0 auto;line-height:0;letter-spacing:0;background:#fff;border-radius:7px;overflow:hidden}
+.logo img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain}
+.side-head .logo{width:98px;border-radius:9px}
+.logo.logo-header{width:38px;border:1px solid #e3ebe5;border-radius:7px}
+.logo.logo-profile{width:104px;margin-bottom:17px;border:1px solid #e5ebe7;border-radius:10px}
+.navbar__brand .logo{width:68px}
+.navbar__brand .logo img,.footer__inner .logo img,.login__logo .logo img{width:100%;height:auto}
+.footer__inner>.logo{width:72px;padding:0}
+.login__logo{padding:0;border-radius:7px;line-height:0}
+.login__logo .logo{width:122px}
+@media(max-width:820px){.logo.logo-header{width:36px}.side-head .logo{width:92px}.login__logo .logo{width:108px}}
+@media(max-width:580px){.navbar__brand .logo{width:57px}.logo.logo-header{width:32px}.login__logo .logo{width:96px}.logo.logo-profile{width:90px}}
