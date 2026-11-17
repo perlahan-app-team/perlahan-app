@@ -1,0 +1,768 @@
+
+/* =========================================
+   PERLAHAN - DATA LAHAN
+========================================= */
+
+.data-content,
+.data-content * {
+    box-sizing: border-box;
+}
+
+.data-content {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px 28px 24px;
+}
+
+/* TAJUK HALAMAN */
+
+.data-heading {
+    margin-bottom: 25px;
+}
+
+.data-heading .date-label {
+    margin: 0 0 12px;
+    color: #16804a;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.data-heading h1 {
+    margin: 0 0 10px;
+    color: #203b2b;
+    font-size: 27px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.data-heading > p:last-child {
+    margin: 0;
+    color: #78877d;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* PENCARIAN DAN FILTER */
+
+.filter-panel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 62px;
+    margin-bottom: 17px;
+    padding: 10px;
+    border: 1px solid #e0e9e3;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.land-search {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    height: 39px;
+    padding: 0 12px;
+    border: 1px solid #dce7df;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.land-search:focus-within {
+    border-color: #31915a;
+    box-shadow: 0 0 0 3px rgba(49, 145, 90, 0.10);
+}
+
+.land-search > span {
+    flex-shrink: 0;
+    color: #8b9a90;
+    font-size: 19px;
+}
+
+.land-search input#searchLahan {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #294433;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.land-search input#searchLahan::placeholder {
+    color: #a0ada4;
+}
+
+.filter-panel select {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 125px;
+    max-width: 175px;
+    height: 39px;
+    padding: 0 12px;
+    border: 1px solid #b9ddc5;
+    border-radius: 9px;
+    background: #fff;
+    color: #176b3c;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.filter-panel select:focus {
+    outline: 2px solid rgba(49, 145, 90, 0.15);
+    border-color: #31915a;
+}
+
+/* JUMLAH HASIL DAN SUSUNAN */
+
+.results-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 17px;
+}
+
+.results-row > p {
+    flex: 1;
+    margin: 0;
+    color: #829087;
+    font-size: 10px;
+}
+
+.results-row > label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    color: #829087;
+    font-size: 10px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.results-row select {
+    width: auto;
+    min-width: 0;
+    max-width: 110px;
+    padding: 4px 20px 4px 2px;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+    background: transparent;
+    color: #53685a;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.results-row select:hover {
+    color: #176b3c;
+}
+
+.results-row select:focus-visible {
+    outline: 2px solid #b9ddc5;
+    outline-offset: 2px;
+}
+
+/* KAD LAHAN */
+
+.data-land-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+}
+
+.data-land-grid .land-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e0e9e3;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(24, 66, 39, 0.035);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.data-land-grid .land-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(24, 66, 39, 0.08);
+}
+
+.data-land-grid .land-image {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
+
+.data-land-grid .land-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.data-land-grid .land-body h3 {
+    margin: 0 0 8px;
+    color: #294433;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.data-land-grid .location {
+    margin: 0 0 14px;
+    color: #87958b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.data-land-grid .land-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: auto 0 14px;
+    padding: 12px 0;
+    border-top: 1px solid #e3ebe5;
+    border-bottom: 1px solid #e3ebe5;
+}
+
+.data-land-grid .land-details > div {
+    min-width: 0;
+}
+
+.data-land-grid .land-details > div + div {
+    padding-left: 14px;
+    border-left: 1px solid #e3ebe5;
+}
+
+.data-land-grid .land-details strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #294433;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.data-land-grid .land-details small {
+    display: block;
+    color: #8a978e;
+    font-size: 8px;
+}
+
+.data-land-grid .detail-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    min-height: 38px;
+    margin-top: auto;
+    padding: 9px 12px;
+    border: 1px solid #b9ddc5;
+    border-radius: 9px;
+    background: #fff;
+    color: #176b3c;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.data-land-grid .detail-button:hover {
+    border-color: #176b3c;
+    background: #eff8f1;
+}
+
+.data-land-grid .detail-button span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* KEADAAN TIADA HASIL */
+
+.empty-state {
+    margin-top: 20px;
+    padding: 45px 20px;
+    border: 1px solid #e0e9e3;
+    border-radius: 14px;
+    background: #fff;
+    color: #78877d;
+    text-align: center;
+}
+
+.empty-state[hidden] {
+    display: none !important;
+}
+
+.empty-state > span {
+    font-size: 30px;
+}
+
+.empty-state h3 {
+    margin: 12px 0 8px;
+    color: #294433;
+    font-size: 17px;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+
+.data-content .footer {
+    margin-top: 23px;
+    padding-bottom: 8px;
+    color: #87958b;
+    font-size: 10px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* =========================================
+   MODAL DETAIL DAN PENGAJUAN
+========================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(14, 44, 28, 0.58);
+    backdrop-filter: blur(3px);
+}
+
+.modal-overlay[hidden],
+.demo-message[hidden] {
+    display: none !important;
+}
+
+.detail-modal {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 32px;
+    border: 1px solid #e2ebe4;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(13, 54, 31, 0.20);
+    animation: modalMasuk 0.2s ease-out;
+}
+
+@keyframes modalMasuk {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e1ebe4;
+    border-radius: 10px;
+    background: #f5f9f6;
+    color: #315b40;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #e4f3e8;
+    color: #155b35;
+}
+
+.detail-modal .date-label {
+    margin: 0 0 9px;
+    color: #18804a;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    line-height: 1.6;
+}
+
+.detail-modal h2 {
+    margin: 0 36px 12px 0;
+    color: #203b2b;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.form-intro {
+    margin: 0 0 24px;
+    color: #77877c;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* FORM PENGAJUAN */
+
+#formPengajuan {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 20px;
+}
+
+#formPengajuan label {
+    margin-top: 10px;
+    color: #304c39;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+#formPengajuan input,
+#formPengajuan select,
+#formPengajuan textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid #d8e5dc;
+    border-radius: 9px;
+    outline: none;
+    background: #fff;
+    color: #263d2e;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+#formPengajuan input::placeholder,
+#formPengajuan textarea::placeholder {
+    color: #a1afa5;
+}
+
+#formPengajuan input:focus,
+#formPengajuan select:focus,
+#formPengajuan textarea:focus {
+    border-color: #3a9560;
+    box-shadow: 0 0 0 3px rgba(58, 149, 96, 0.12);
+}
+
+#formPengajuan input[readonly] {
+    border-color: #e2ebe4;
+    background: #f4f8f5;
+    color: #597262;
+}
+
+#formPengajuan textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* BUTANG */
+
+.primary-button,
+#formPengajuan .submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 45px;
+    padding: 12px 18px;
+    border: 1px solid #176b3c;
+    border-radius: 9px;
+    background: #176b3c;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primary-button:hover,
+#formPengajuan .submit-button:hover {
+    background: #10552e;
+}
+
+.modal-action,
+#formPengajuan .submit-button {
+    width: 100%;
+}
+
+#formPengajuan .submit-button {
+    margin-top: 17px;
+}
+
+.form-note {
+    margin: 2px 0 0;
+    color: #8b998f;
+    font-size: 11px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.demo-message {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid #bde4c9;
+    border-radius: 10px;
+    background: #edf9f0;
+    color: #176b3c;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* MAKLUMAT MODAL DETAIL */
+
+.modal-info {
+    margin-top: 20px;
+    padding: 4px 16px;
+    border: 1px solid #e2ebe4;
+    border-radius: 11px;
+    background: #fbfdfb;
+}
+
+.modal-info p {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 0;
+    padding: 14px 0;
+    border-bottom: 1px solid #e8efe9;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.modal-info p:last-child {
+    border-bottom: 0;
+}
+
+.modal-info strong {
+    flex-shrink: 0;
+    color: #78877d;
+    font-weight: 500;
+}
+
+.modal-info span {
+    color: #294433;
+    font-weight: 700;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.modal-note {
+    margin: 20px 0;
+    color: #7c8b80;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+    .data-content {
+        padding: 25px 20px;
+    }
+
+    .filter-panel {
+        flex-wrap: wrap;
+    }
+
+    .land-search {
+        flex: 1 1 100%;
+    }
+
+    .filter-panel select {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .data-land-grid {
+        gap: 14px;
+    }
+
+    .data-land-grid .land-image {
+        height: 165px;
+    }
+}
+
+@media (max-width: 900px) {
+    .data-land-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-overlay {
+        align-items: flex-start;
+        padding: 20px 14px;
+    }
+
+    .detail-modal {
+        max-width: 520px;
+        max-height: calc(100vh - 40px);
+        padding: 26px 22px;
+        border-radius: 15px;
+    }
+
+    .detail-modal h2 {
+        font-size: 21px;
+    }
+
+    #formPengajuan input,
+    #formPengajuan select,
+    #formPengajuan textarea {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .data-content {
+        padding: 22px 14px;
+    }
+
+    .data-heading h1 {
+        font-size: 24px;
+    }
+
+    .filter-panel select {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .results-row {
+        align-items: center;
+    }
+
+    .results-row > label {
+        gap: 3px;
+    }
+
+    .results-row select {
+        max-width: 100px;
+    }
+
+    .data-land-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .data-land-grid .land-image {
+        height: 200px;
+    }
+
+    .modal-overlay {
+        padding: 12px;
+    }
+
+    .detail-modal {
+        max-height: calc(100vh - 24px);
+        padding: 24px 17px;
+        border-radius: 13px;
+    }
+
+    .modal-close {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .detail-modal .date-label {
+        padding-right: 32px;
+        font-size: 9px;
+    }
+
+    .detail-modal h2 {
+        margin-right: 25px;
+        font-size: 19px;
+    }
+
+    .form-intro {
+        font-size: 12px;
+    }
+
+    #formPengajuan {
+        gap: 7px;
+    }
+
+    #formPengajuan label {
+        margin-top: 9px;
+    }
+
+    #formPengajuan input,
+    #formPengajuan select,
+    #formPengajuan textarea {
+        padding: 11px 12px;
+    }
+
+    #formPengajuan textarea {
+        min-height: 105px;
+    }
+
+    .modal-info {
+        padding: 4px 12px;
+    }
+
+    .modal-info p {
+        gap: 12px;
+        font-size: 11px;
+    }
+
+    .form-note {
+        font-size: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .detail-modal,
+    .data-land-grid .land-card {
+        animation: none;
+        transition: none;
+    }
+}

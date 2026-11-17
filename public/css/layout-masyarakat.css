@@ -1,0 +1,177 @@
+
+/* LAYOUT UTAMA MASYARAKAT */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #203b2b;
+    background: #f5faf6;
+    font-size: 12px;
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-area {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    height: 74px;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 28px;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e9e3;
+}
+
+.page-heading small,
+.page-heading strong {
+    display: block;
+}
+
+.page-heading small {
+    margin-bottom: 5px;
+    color: #89958d;
+    font-size: 10px;
+}
+
+.page-heading strong {
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-box {
+    width: 230px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: 1px solid #dce6df;
+    border-radius: 9px;
+    background: #ffffff;
+}
+
+.search-box > span {
+    color: #84948a;
+    font-size: 22px;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 10px;
+}
+
+.search-box input::placeholder {
+    color: #a3aea8;
+}
+
+.notification-button {
+    width: 38px;
+    height: 38px;
+    position: relative;
+    border: 1px solid #dce6df;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #334b3c;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: #def3e4;
+    color: #176b3c;
+    font-weight: 800;
+    font-size: 10px;
+}
+
+.profile-info strong,
+.profile-info small {
+    display: block;
+    white-space: nowrap;
+}
+
+.profile-info strong {
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.profile-info small {
+    color: #87948d;
+    font-size: 8px;
+}
+
+.profile-arrow {
+    margin-left: 6px;
+    font-size: 17px;
+}
+
+.page-content {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 760px) {
+    .topbar {
+        height: auto;
+        min-height: 65px;
+        padding: 12px 14px;
+    }
+
+    .topbar-right {
+        gap: 7px;
+    }
+
+    .search-box {
+        width: 145px;
+    }
+
+    .profile-info,
+    .profile-arrow {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-box {
+        width: 110px;
+    }
+
+    .topbar {
+        gap: 8px;
+    }
+}

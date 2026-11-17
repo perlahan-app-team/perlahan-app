@@ -1,0 +1,235 @@
+
+/* SIDEBAR PERLAHAN */
+
+.sidebar {
+    width: 246px;
+    min-height: 100vh;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 23px 17px 20px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #155b35 0%, #104b2d 100%);
+}
+
+.brand {
+    padding: 0 8px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.brand-logo {
+    width: 98px;
+    min-height: 91px;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #155b35;
+}
+
+.brand-symbol {
+    font-size: 32px;
+    line-height: 1.1;
+}
+
+.brand-logo strong {
+    font-size: 15px;
+    letter-spacing: -0.5px;
+}
+
+.brand-logo small {
+    margin-top: 3px;
+    font-size: 6px;
+}
+
+.account-box {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 18px 2px 27px;
+    padding: 12px 10px;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #d8f5df;
+    color: #155b35;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.account-box strong,
+.account-box small {
+    display: block;
+}
+
+.account-box strong {
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.account-box small {
+    margin-top: 3px;
+    color: #c9e3d2;
+    font-size: 8px;
+}
+
+.sidebar-label {
+    margin: 0 10px 12px;
+    color: #a8cbb6;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 42px;
+    padding: 10px 11px;
+    border-radius: 7px;
+    color: #d9e9df;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-link > span:first-child {
+    width: 17px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 17px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 30px;
+}
+
+.sdg-box {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 7px 18px;
+}
+
+.sdg-box > span {
+    font-size: 20px;
+}
+
+.sdg-box strong,
+.sdg-box small {
+    display: block;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+.sdg-box small {
+    color: #c9e3d2;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    color: #d9e9df;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 7px;
+}
+
+/* RESPONSIVE SIDEBAR */
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 200px;
+        padding: 18px 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 65px;
+        padding: 12px 6px;
+    }
+
+    .brand {
+        padding: 0 0 12px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .brand-logo {
+        width: 48px;
+        min-height: 48px;
+        padding: 4px;
+    }
+
+    .brand-symbol {
+        font-size: 21px;
+    }
+
+    .brand-logo strong {
+        font-size: 7px;
+    }
+
+    .brand-logo small,
+    .account-box,
+    .sidebar-label,
+    .nav-text,
+    .sdg-box,
+    .logout-link span {
+        display: none;
+    }
+
+    .sidebar-nav {
+        margin-top: 15px;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 11px 0;
+    }
+
+    .nav-link > span:first-child {
+        font-size: 18px;
+    }
+
+    .sidebar-bottom {
+        padding-top: 15px;
+    }
+
+    .logout-link {
+        justify-content: center;
+    }
+}

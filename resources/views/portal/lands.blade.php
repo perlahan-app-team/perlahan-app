@@ -1,0 +1,7 @@
+@extends('layouts.portal')
+@section('title','Data Lahan')
+@section('content')
+<div class="page-intro"><div><span class="eyebrow">INVENTARIS LAHAN</span><h1>Data Lahan</h1><p>Kelola lokasi, kondisi, foto, dan ketersediaan lahan.</p></div><a class="btn btn-primary" href="{{ route('admin.lahan.create') }}">+ Tambah Lahan</a></div>
+<form class="portal-filters"><input name="cari" value="{{ request('cari') }}" placeholder="Cari nama atau alamat lahan" aria-label="Cari lahan"><button class="btn btn-primary">Cari</button><a class="btn btn-secondary" href="{{ route('admin.lahan.index') }}">Reset</a></form>
+<div class="table-wrap"><table><thead><tr><th>Kode / Nama</th><th>Lokasi</th><th>Luas</th><th>Status</th><th>Aksi</th></tr></thead><tbody>@forelse($lahans as $item)<tr><td><strong>{{ $item->nama_lahan }}</strong><small>{{ $item->kode_lahan }}</small></td><td>{{ $item->alamat }}<small>{{ $item->kota }}</small></td><td>{{ number_format($item->luas,0,',','.') }} m²</td><td>@include('portal.status',['status'=>$item->status])</td><td><a href="{{ route('admin.lahan.edit',$item) }}">Edit</a><form class="delete-form" method="POST" action="{{ route('admin.lahan.destroy',$item) }}" onsubmit="return confirm('Hapus lahan ini?')">@csrf @method('DELETE')<button class="text-danger">Hapus</button></form></td></tr>@empty<tr><td colspan="5" class="empty-state">Belum ada data lahan. Tambahkan lahan pertama untuk memulai.</td></tr>@endforelse</tbody></table></div>{{ $lahans->links() }}
+@endsection
